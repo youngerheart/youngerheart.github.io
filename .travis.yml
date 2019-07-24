@@ -1,0 +1,11 @@
+language: node_js
+sudo: required
+node_js: stable
+branch: dev
+cache:
+  directories:
+    - node_modules
+before_install:
+  - export TZ='Asia/Shanghai'  # 设置时区
+script:
+  - ./deploy.sh
