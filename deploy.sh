@@ -10,11 +10,12 @@ npm run build
 cd .vuepress/dist
 
 git init
-git add -A
-git commit -m 'deploy'
 
 git config --local user.name "youngerheart"
 git config --local user.email "admin@timehub.cc"
+
+git add -A
+git commit -m 'deploy'
 
 git push -f https://${access_token}@github.com/youngerheart/youngerheart.github.io.git master
 

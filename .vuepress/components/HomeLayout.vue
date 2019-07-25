@@ -62,16 +62,16 @@ export default {
       }
     },
     articles() {
-      const { regularPath } = this.$page;
+      const { regularPath } = this.$page
       return this.$site.pages
         .filter(p => p.regularPath.indexOf(regularPath) > -1
           && p.relativePath.indexOf('README.md') === -1)
-        .sort((p1, p2) => Date.parse(p2.frontmatter.date) - Date.parse(p1.frontmatter.date));
+        .sort((p1, p2) => Date.parse(p2.frontmatter.date) - Date.parse(p1.frontmatter.date))
     }
   },
   methods: {
     toggleSidebar (to) {
-      this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen;
+      this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
     }
   }
 }
