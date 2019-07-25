@@ -1,7 +1,15 @@
+---
+title: 桌面版OBS开发配置
+date: 2019/07/25 18:10:21
+sidebar: auto
+meta:
+  - name: description
+    content: 比坑更坑
+---
+
 开发配置：
 
 1、克隆项目（完成）
-git clone git@talkcheap.xiaoeknow.com:XiaoeFE/xiaoe-obs.git
 
 2、安装依赖（完成）
 brew install qt

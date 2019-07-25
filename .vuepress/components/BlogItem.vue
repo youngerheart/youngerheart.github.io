@@ -22,9 +22,11 @@
     computed: {
       meta() {
         let obj = {}
-        this.page.frontmatter.meta.forEach((meta) => {
-          obj[meta.name] = meta.content
-        })
+        if (this.page.frontmatter.meta) {
+          this.page.frontmatter.meta.forEach((meta) => {
+            obj[meta.name] = meta.content
+          })
+        }
         return obj
       }
     }
