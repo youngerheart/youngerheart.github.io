@@ -1,5 +1,5 @@
 ---
-title: vue.js技术揭秘
+title: vue.js技术揭秘(1)
 date: 2019/07/11 21:34:11
 sidebar: auto
 meta:
@@ -41,7 +41,7 @@ add('Hello', 11); // Error: arguments must be number
 var arr: Array<number> = [1, 2, 3]
 arr.push('hello') // Error: items must be number
 
-class Bsr {
+class Bar {
   x: string;
   y: string | number;
 }
@@ -89,7 +89,7 @@ Vue.js 是跨平台的MVVM框架，可以跑在web上，也可以配合weex跑�
 这里是不同平台的入口文件。
 
 #### server
-Vue.js 2.0支持了服务器渲染，所有服务端渲染相关逻辑都在这个目录。这里是排在服务器的Node.js代码。
+Vue.js 2.0支持了服务器渲染，所有服务端渲染相关逻辑都在这个目录。这里是跑在服务器的Node.js代码。
 
 #### sfc
 将.vue文件内容解析为一个JavaScript对象。
@@ -238,6 +238,7 @@ Vue.prototype._init = function (options?: Object) {
 `src/platform/web/entry-runtime-with-compiler.js`
 
 ```
+Vue.prototype.$mount = function ( ...
 if (el === document.body || el === document.documentElement) warn()
 if (!options.render) {
   if (template.charAt(0) === '#') template = idToTemplate(template)
@@ -282,14 +283,14 @@ updateComponent = () => {
 new Watcher(vm, updateComponent, noop, {
   before () {
     if (vm._isMounted) {
-      callHook(vm, 'beforeUpdate')
+      callHook(vm, 'beforeUpdate')  // 触发生命周期钩子
     }
   }
 }, true /* isRenderWatcher */)
 hydrating = false
 if (vm.$vnode == null) {
   vm._isMounted = true
-  callHook(vm, 'mounted')
+  callHook(vm, 'mounted')  // 触发生命周期钩子
 }
 return vm
 ```
@@ -324,7 +325,7 @@ vm._render 最终是通过执行 createElement 方法并返回的是 vnode (Virt
 
 Virtual DOM 用原生 JS 对象去描述 DOM 节点，比创建 DOM 的代价小很多。Vue 中 Virtual DOM 用 VNode 的 Class 去描述，定义在 `src/core/vdom/vnode.js` 中。
 
-VNode 只用来映射到真实 DOM 的渲染，不需要包含操作真正 DOM 的方法。其创建时通过之前提到的 createElement 方法创建的。
+VNode 只用来映射到真实 DOM 的渲染，不需要包含操作真正 DOM 的方法。其创建是通过之前提到的 createElement 方法创建的。
 
 ### createElement
 
@@ -433,6 +434,8 @@ function normalizeArrayChildren (children: any, nestedIndex?: string): Array<VNo
 #### VNode 的创建
 
 `createElement` 函数中，规范了 children 后将会去创建一个 VNode 实例。
+
+`['普通 VNode', '组件 VNode', '未知类型 VNode']`
 
 当tag是一个 string，判断是否是一个内置节点，如果是则创建一个普通 VNode。否则如果是已注册的组件名则创建一个组件 VNode，否则创建一个未知类型的VNode。
 
