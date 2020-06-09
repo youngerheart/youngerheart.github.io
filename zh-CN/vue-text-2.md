@@ -109,6 +109,9 @@ Vue的vdom参考了开源库snabbdom，它的特点是在patch流程中对外暴
 installComponentHooks(data)
 ```
 
+`src/core/vdom/create-component.js`
+
+
 ```
 const componentVNodeHooks = {
   init (vnode: VNodeWithData, hydrating: boolean): ?boolean {}
@@ -150,3 +153,76 @@ return vnode
 通过 new VNode实例化一个 vnode 并返回。与普通元素节点的 vnode 不同，组件的 vnode 是没有 children 的。
 
 createComponent 会返回 vnode，同样会执行 `vm._update` 方法，进而执行 `patch` 函数。
+
+## patch
+
+patch 的过程会调用 createElm 创建元素节点，定义在 `src/core/vdom/patch.js` 中
+
+```
+function createElm (
+  vnode,
+  insertedVnodeQueue,
+  parentElm,
+  refElm,
+  nested,
+  ownerArray,
+  index
+) {
+  // 这里又会出现一个 createComponent
+  if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
+    return
+  }
+  // ...
+}
+```
+
+### createComponent
+
+```
+function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
+  let i = vnode.data
+  if (isDef(i)) {
+    const isReactivated = isDef(vnode.componentInstance) && i.keepAlive
+    if (isDef(i = i.hook) && isDef(i = i.init)) {
+      i(vnode, false /* hydrating */)
+    }
+    // after calling the init hook, if the vnode is a child component
+    // it should've created a child instance and mounted it. the child
+    // component also has set the placeholder vnode's elm.
+    // in that case we can just return the element and be done.
+    if (isDef(vnode.componentInstance)) {
+      initComponent(vnode, insertedVnodeQueue)
+      insert(parentElm, vnode.elm, refElm)
+      if (isTrue(isReactivated)) {
+        reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm)
+      }
+      return true
+    }
+  }
+}
+```
+
+首先对 `vnode.data` 做判断，如果 vnode 是一个 VNode，则得到 i 是钩子函数。在创建组件 VNode 时合并的钩子函数中包含 init 钩子函数。（上一章介绍过）
+该函数通过 `createComponentInstanceForVnode` 创建一个 Vue 的实例，然后调用 `$mount` 方法挂载子组件。
+
+```
+export function createComponentInstanceForVnode (
+  vnode: any, // we know it's MountedComponentVNode but flow doesn't
+  parent: any, // activeInstance in lifecycle state
+): Component {
+  const options: InternalComponentOptions = {
+    _isComponent: true,
+    _parentVnode: vnode,
+    parent
+  }
+  // check inline-template render functions
+  const inlineTemplate = vnode.data.inlineTemplate
+  if (isDef(inlineTemplate)) {
+    options.render = inlineTemplate.render
+    options.staticRenderFns = inlineTemplate.staticRenderFns
+  }
+  return new vnode.componentOptions.Ctor(options)
+}
+```
+
+这里的 `new vnode.componentOptions.Ctor(options)` 相当于上节的 `new Sub(options)`
