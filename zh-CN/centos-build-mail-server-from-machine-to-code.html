@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CentOS下搭建邮件服务器-从机器到代码 | 小径分岔的花园</title>
+    <meta name="description" content="自己配置并维护一个邮件服务器有什么好处呢？总之还是为了装x。">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.7b2134bf.css" as="style"><link rel="preload" href="/assets/js/app.cea302cc.js" as="script"><link rel="preload" href="/assets/js/3.19db34b2.js" as="script"><link rel="preload" href="/assets/js/1.4d56c206.js" as="script"><link rel="preload" href="/assets/js/11.7fb4689e.js" as="script"><link rel="prefetch" href="/assets/js/10.98dc1e52.js"><link rel="prefetch" href="/assets/js/12.2ed3259e.js"><link rel="prefetch" href="/assets/js/13.2a95825c.js"><link rel="prefetch" href="/assets/js/14.618c3df5.js"><link rel="prefetch" href="/assets/js/15.4fcf900b.js"><link rel="prefetch" href="/assets/js/16.c92ef2b0.js"><link rel="prefetch" href="/assets/js/17.13be32c3.js"><link rel="prefetch" href="/assets/js/18.a189bad8.js"><link rel="prefetch" href="/assets/js/19.52cdb21f.js"><link rel="prefetch" href="/assets/js/20.5a25b9c0.js"><link rel="prefetch" href="/assets/js/21.35a53d71.js"><link rel="prefetch" href="/assets/js/22.990baba6.js"><link rel="prefetch" href="/assets/js/4.b95b1c30.js"><link rel="prefetch" href="/assets/js/5.77231472.js"><link rel="prefetch" href="/assets/js/6.e7dd61c7.js"><link rel="prefetch" href="/assets/js/7.3374042c.js"><link rel="prefetch" href="/assets/js/8.a1dda5c9.js"><link rel="prefetch" href="/assets/js/9.db049bb0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b2134bf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh-CN/" class="home-link router-link-active"><!----> <span class="site-name">小径分岔的花园</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html" class="nav-link router-link-exact-active router-link-active">zh-CN</a></li><li class="dropdown-item"><!----> <a href="/en/" class="nav-link">en</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html" class="nav-link router-link-exact-active router-link-active">zh-CN</a></li><li class="dropdown-item"><!----> <a href="/en/" class="nav-link">en</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>CentOS下搭建邮件服务器-从机器到代码</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#自己配置并维护一个邮件服务器有什么好处呢？" class="sidebar-link">自己配置并维护一个邮件服务器有什么好处呢？</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#准备工作" class="sidebar-link">准备工作</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#dns-解析" class="sidebar-link">DNS 解析</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#安装-postfix（发送电子邮件服务器" class="sidebar-link">安装 Postfix（发送电子邮件服务器)</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#安装-dovecot（接收-imap-和-pop3-邮件服务器）" class="sidebar-link">安装 Dovecot（接收 IMAP 和 POP3 邮件服务器）</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#启动所有服务" class="sidebar-link">启动所有服务</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#连接邮件客户端" class="sidebar-link">连接邮件客户端</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/centos-build-mail-server-from-machine-to-code.html#nodejs-下发送邮件" class="sidebar-link">NodeJS 下发送邮件</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="自己配置并维护一个邮件服务器有什么好处呢？"><a href="#自己配置并维护一个邮件服务器有什么好处呢？" class="header-anchor">#</a> 自己配置并维护一个邮件服务器有什么好处呢？</h2> <ol><li>不必再用 qq, 163 之类看上去比较 lowbi 的邮箱。</li> <li>不必再用 gmail 之类收个邮件还要翻墙的邮箱。</li> <li>精选的应用账号绑定到自己邮件服务器的邮箱，其他的绑定到 lowbi 邮箱，省的垃圾邮件太多。</li> <li>随意定ID，各种高大上。</li></ol> <p>说了那么多，总之还是为了装x。</p> <p>这里机器配置大部分都原搬 <a href="https://www.fancycoding.com/centos7-mail-server-with-dovecot-postfix-ssl/" target="_blank" rel="noopener noreferrer">https://www.fancycoding.com/centos7-mail-server-with-dovecot-postfix-ssl/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 这篇文章，向作者表示感谢。</p> <h2 id="准备工作"><a href="#准备工作" class="header-anchor">#</a> 准备工作</h2> <p>首先你需要有这些个东西</p> <ol><li>自己的机器（VPS）。</li> <li>一级域名，然后再去解析个 <code>mail.domain.com</code> 的二级域名（A记录）。</li> <li>二级域名去配置下 SSL 证书， 可以用到这个工具：<a href="https://github.com/Neilpang/acme.sh" target="_blank" rel="noopener noreferrer">Neilpang / acme.sh<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。在最后会执行这个命令</li></ol> <div class="language- extra-class"><pre class="language-text"><code>acme.sh  --installcert  -d  mail.timehub.cc   \
+        --keypath   /etc/nginx/keys/mail.timehub.key \ # 域名证书私钥
+        --fullchainpath /etc/nginx/keys/mail.timehub.crt \  # 公钥
+        --certpath /etc/nginx/keys/mail.timehub.pem \ # CA证书
+        --reloadcmd  &quot;service nginx restart&quot;
+</code></pre></div><p>记住这三个文件的路径。</p> <h2 id="dns-解析"><a href="#dns-解析" class="header-anchor">#</a> DNS 解析</h2> <p>（<a href="http://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="noopener noreferrer">DNS 解析的基础知识<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>）</p> <p>去你的域名提供商那的解析表单，做如下操作：</p> <ol><li>为主域名添加一条 MX 记录，记录值为 <code>mail.domain.com</code>，优先级为 1 即可。</li> <li>为主域名添加一条 TXT 记录，该记录值为 <a href="http://www.openspf.org/SPF_Record_Syntax" target="_blank" rel="noopener noreferrer">SPF<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>v=spf1 a mx ~all // 指出除了解析的 A 记录 和 MX 记录之外的域发送的邮件都是伪造的
+</code></pre></div><p>解析个一阵，使用 dig 命令查看是否成功：</p> <div class="language- extra-class"><pre class="language-text"><code>$ dig MX mail.timehub.cc
+
+; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; MX mail.timehub.cc
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 45640
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;mail.timehub.cc.		IN	MX
+
+;; AUTHORITY SECTION:
+timehub.cc.		3496	IN	SOA	ns19.xincache.com. hostmaster.xinnetdns.com. 2002042718 3600 900 720000 3600
+</code></pre></div><h2 id="安装-postfix（发送电子邮件服务器"><a href="#安装-postfix（发送电子邮件服务器" class="header-anchor">#</a> 安装 Postfix（发送电子邮件服务器)</h2> <p>安装 <a href="https://en.wikipedia.org/wiki/Postfix_(software)">Postfix</a> 并删除原先的 sendMail：</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install postfix
+yum remove sendmail
+</code></pre></div><p>然后进行基本配置：</p> <div class="language- extra-class"><pre class="language-text"><code>$ vi /etc/postfix/main.cf
+
+myhostname = mail.timehub.cc
+mydomain = timehub.cc
+myorigin = mail.timehub.cc
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128, 192.168.1.0/24
+inet_interfaces = all
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_type = cyrus
+smtpd_sasl_security_options = noanonymous
+broken_sasl_auth_clients = yes
+smtpd_sasl_authenticated_header = yes
+smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination
+smtpd_tls_auth_only = no
+smtp_use_tls = yes
+smtpd_use_tls = yes
+smtp_tls_note_starttls_offer = yes
+smtpd_tls_key_file = /etc/nginx/keys/mail.timehub.key
+smtpd_tls_cert_file = /etc/nginx/keys/mail.timehub.crt
+smtpd_tls_CAfile = /etc/nginx/keys/mail.timehub.pem
+smtpd_tls_received_header = yes
+smtpd_tls_session_cache_timeout = 3600s
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>$ vi /etc/postfix/master.cf
+
+submission inet n       -       -       -       -       smtpd
+  -o syslog_name=postfix/submission
+  -o smtpd_tls_wrappermode=no
+  -o smtpd_tls_security_level=encrypt
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject
+  -o milter_macro_daemon_name=ORIGINATING
+  -o smtpd_sasl_type=dovecot
+  -o smtpd_sasl_path=private/auth
+</code></pre></div><h2 id="安装-dovecot（接收-imap-和-pop3-邮件服务器）"><a href="#安装-dovecot（接收-imap-和-pop3-邮件服务器）" class="header-anchor">#</a> 安装 Dovecot（接收 IMAP 和 POP3 邮件服务器）</h2> <p>安装 <a href="https://en.wikipedia.org/wiki/Dovecot_(software)">Dovecot</a>:</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install  dovecot
+</code></pre></div><p>然后进行基本配置：</p> <div class="language- extra-class"><pre class="language-text"><code>$ vim /etc/dovecot/dovecot.conf
+
+protocols = imap pop3
+mail_location = mbox:~/mail:INBOX=/var/mail/%u
+pop3_uidl_format = %08Xu%08Xv
+
+service auth {
+    unix_listener /var/spool/postfix/private/auth {
+    group = postfix
+    mode = 0660
+    user = postfix
+}
+}
+
+ssl=required
+ssl_cert = &lt;/etc/nginx/keys/mail.timehub.crt
+ssl_key = &lt;/etc/nginx/keys/mail.timehub.key
+ssl_ca = &lt;/etc/nginx/keys/mail.timehub.pem
+</code></pre></div><h2 id="启动所有服务"><a href="#启动所有服务" class="header-anchor">#</a> 启动所有服务</h2> <div class="language- extra-class"><pre class="language-text"><code>$ newaliases # 将送给使用者的信都收给 mailing list 处理程序负责分送的工作
+$ service postfix restart
+$ service dovecot restart
+</code></pre></div><p>查看 log：</p> <div class="language- extra-class"><pre class="language-text"><code>$ cat /var/log/maillog
+
+Feb 21 15:12:00 fancycoding dovecot: master: Dovecot v2.2.10 starting up for imap, pop3 (core dumps disabled)
+</code></pre></div><p>如果一直没有 log 生成，试着重启下系统日志服务：</p> <div class="language- extra-class"><pre class="language-text"><code>$ service rsyslog restart
+</code></pre></div><h2 id="连接邮件客户端"><a href="#连接邮件客户端" class="header-anchor">#</a> 连接邮件客户端</h2> <p>首先创建用户：</p> <div class="language- extra-class"><pre class="language-text"><code>useradd -s /sbin/nologin admin
+passwd admin
+</code></pre></div><p>打开邮件客户端，新建账户 <code>admin@domain.com</code>，收发邮件服务器填写 <code>mail.domain.com</code>，顺利的话就可以收发邮件了。</p> <h2 id="nodejs-下发送邮件"><a href="#nodejs-下发送邮件" class="header-anchor">#</a> NodeJS 下发送邮件</h2> <p>使用到 <a href="https://github.com/nodemailer/nodemailer" target="_blank" rel="noopener noreferrer">nodemailer<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，首先从 npm 安装：</p> <div class="language- extra-class"><pre class="language-text"><code>$ npm install nodemailer --save
+</code></pre></div><p>在代码中使用：</p> <div class="language- extra-class"><pre class="language-text"><code>import nodemailer from 'nodemailer';
+
+const mailTransport = nodemailer.createTransport({
+  host: 'mail.timehub.cc',
+  secureConnection: true, // use SSL
+  auth: {
+    user: 'lightpress',
+    pass: 'pass'
+  }
+});
+
+export default {
+  send(options) {
+    var {to = [], subject = '', text = '', html = ''} = options;
+    return new Promise((reslove, reject) =&gt; {
+      mailTransport.sendMail({
+        from: '&quot;Lightpress&quot; &lt;lightpress@timehub.cc&gt;',
+        to: to.join(','),
+        subject, text, html
+      }, (err, msg) =&gt; {
+        if (err) reject(err);
+        else reslove(msg);
+      });
+    });
+  }
+};
+</code></pre></div><p>正常的话即可发出邮件。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2019/7/24 下午8:12:16</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.cea302cc.js" defer></script><script src="/assets/js/3.19db34b2.js" defer></script><script src="/assets/js/1.4d56c206.js" defer></script><script src="/assets/js/11.7fb4689e.js" defer></script>
+  </body>
+</html>

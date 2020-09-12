@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue.js技术揭秘(2) | 小径分岔的花园</title>
+    <meta name="description" content="Vue 学习笔记。">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.7b2134bf.css" as="style"><link rel="preload" href="/assets/js/app.cea302cc.js" as="script"><link rel="preload" href="/assets/js/3.19db34b2.js" as="script"><link rel="preload" href="/assets/js/1.4d56c206.js" as="script"><link rel="preload" href="/assets/js/20.5a25b9c0.js" as="script"><link rel="prefetch" href="/assets/js/10.98dc1e52.js"><link rel="prefetch" href="/assets/js/11.7fb4689e.js"><link rel="prefetch" href="/assets/js/12.2ed3259e.js"><link rel="prefetch" href="/assets/js/13.2a95825c.js"><link rel="prefetch" href="/assets/js/14.618c3df5.js"><link rel="prefetch" href="/assets/js/15.4fcf900b.js"><link rel="prefetch" href="/assets/js/16.c92ef2b0.js"><link rel="prefetch" href="/assets/js/17.13be32c3.js"><link rel="prefetch" href="/assets/js/18.a189bad8.js"><link rel="prefetch" href="/assets/js/19.52cdb21f.js"><link rel="prefetch" href="/assets/js/21.35a53d71.js"><link rel="prefetch" href="/assets/js/22.990baba6.js"><link rel="prefetch" href="/assets/js/4.b95b1c30.js"><link rel="prefetch" href="/assets/js/5.77231472.js"><link rel="prefetch" href="/assets/js/6.e7dd61c7.js"><link rel="prefetch" href="/assets/js/7.3374042c.js"><link rel="prefetch" href="/assets/js/8.a1dda5c9.js"><link rel="prefetch" href="/assets/js/9.db049bb0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b2134bf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh-CN/" class="home-link router-link-active"><!----> <span class="site-name">小径分岔的花园</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/zh-CN/vue-text-2.html" class="nav-link router-link-exact-active router-link-active">zh-CN</a></li><li class="dropdown-item"><!----> <a href="/en/" class="nav-link">en</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/zh-CN/vue-text-2.html" class="nav-link router-link-exact-active router-link-active">zh-CN</a></li><li class="dropdown-item"><!----> <a href="/en/" class="nav-link">en</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>vue.js技术揭秘(2)</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh-CN/vue-text-2.html#createcomponent" class="sidebar-link">createComponent</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-CN/vue-text-2.html#构造子类构造函数" class="sidebar-link">构造子类构造函数</a></li><li class="sidebar-sub-header"><a href="/zh-CN/vue-text-2.html#安装组件钩子函数" class="sidebar-link">安装组件钩子函数</a></li><li class="sidebar-sub-header"><a href="/zh-CN/vue-text-2.html#实例化vnode" class="sidebar-link">实例化VNode</a></li></ul></li><li><a href="/zh-CN/vue-text-2.html#patch" class="sidebar-link">patch</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-CN/vue-text-2.html#createcomponent-2" class="sidebar-link">createComponent</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="组件化"><a href="#组件化" class="header-anchor">#</a> 组件化</h1> <p>组件化，就是把页面拆分为多个组件，组件是资源独立的，组件在系统内可复用，组件和组件之间可以嵌套。</p> <h2 id="createcomponent"><a href="#createcomponent" class="header-anchor">#</a> createComponent</h2> <p><code>createElement</code> 最终会调用 <code>_createElement</code> 方法，其中有一段对 <code>tag</code> 的判断，如果是一个 string，会实例化为一个普通 VNode 节点或未知类型节点，否则通过 <code>createComponent</code> 方法创建一个组件 VNode。</p> <p>传入的是一个App对象时，直接通过 createComponent 方法创建 vnode。</p> <div class="language- extra-class"><pre class="language-text"><code>export function createComponent (
+  Ctor: Class&lt;Component&gt; | Function | Object | void,
+  data: ?VNodeData,
+  context: Component,
+  children: ?Array&lt;VNode&gt;,
+  tag?: string
+): VNode | Array&lt;VNode&gt; | void {}
+</code></pre></div><p><code>src/core/vdom/create-component.js</code> 中主要有以下三个步骤：</p> <h3 id="构造子类构造函数"><a href="#构造子类构造函数" class="header-anchor">#</a> 构造子类构造函数</h3> <div class="language- extra-class"><pre class="language-text"><code>const baseCtor = context.$options._base
+
+// plain options object: turn it into a constructor
+if (isObject(Ctor)) {
+  Ctor = baseCtor.extend(Ctor)
+}
+
+import HelloWorld from './components/HelloWorld'
+
+export default {
+  name: 'app',
+  components: {
+    HelloWorld
+  }
+}
+</code></pre></div><p>这里export了一个对象，createComponent 中就会执行到 baseCtor.extend(Ctor)，baseCtor就是 Vue，这是 <code>src/core/global-api/index.js</code> 中 initGlobalAPI 函数的逻辑：</p> <div class="language- extra-class"><pre class="language-text"><code>Vue.options._base = Vue
+</code></pre></div><p>这里定义了options，之前的 createComponent 取自 context.$options，在 <code>src/core/instance/init.js</code> 原型上的 _init 函数中有相关逻辑:</p> <div class="language- extra-class"><pre class="language-text"><code>vm.$options = mergeOptions(
+  resolveConstructorOptions(vm.constructor),
+  options || {},
+  vm
+)
+</code></pre></div><p><strong><code>Vue.extend</code> 的定义</strong></p> <div class="language- extra-class"><pre class="language-text"><code>Vue.extend = function (extendOptions: Object): Function {
+  extendOptions = extendOptions || {}
+  const Super = this
+  const SuperId = Super.cid
+  const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
+  if (cachedCtors[SuperId]) {
+    return cachedCtors[SuperId]
+  }
+
+  const name = extendOptions.name || Super.options.name
+  if (process.env.NODE_ENV !== 'production' &amp;&amp; name) {
+    validateComponentName(name)
+  }
+
+  const Sub = function VueComponent (options) {
+    this._init(options)
+  }
+  Sub.prototype = Object.create(Super.prototype)
+  Sub.prototype.constructor = Sub
+  Sub.options = mergeOptions(
+    Super.options,
+    extendOptions
+  )
+  Sub['super'] = Super
+  ...
+  // cache constructor
+  cachedCtors[SuperId] = Sub
+  return Sub
+}
+</code></pre></div><p>将一个纯对象转化为一个基于 Vue 的构造器 Sub 并返回，并对其进行拓展，最后将该构造器针对其Id进行缓存避免重复构造。</p> <h3 id="安装组件钩子函数"><a href="#安装组件钩子函数" class="header-anchor">#</a> 安装组件钩子函数</h3> <p>Vue的vdom参考了开源库snabbdom，它的特点是在patch流程中对外暴露了各种时机的钩子函数。</p> <div class="language- extra-class"><pre class="language-text"><code>installComponentHooks(data)
+</code></pre></div><p><code>src/core/vdom/create-component.js</code></p> <div class="language- extra-class"><pre class="language-text"><code>const componentVNodeHooks = {
+  init (vnode: VNodeWithData, hydrating: boolean): ?boolean {}
+  prepatch (oldVnode: MountedComponentVNode, vnode: MountedComponentVNode) {}
+  insert (vnode: MountedComponentVNode) {}
+  destroy (vnode: MountedComponentVNode) {}
+}
+
+const hooksToMerge = Object.keys(componentVNodeHooks)
+
+function installComponentHooks (data: VNodeData) {
+  const hooks = data.hook || (data.hook = {})
+  for (let i = 0; i &lt; hooksToMerge.length; i++) {
+    const key = hooksToMerge[i]
+    const existing = hooks[key]
+    const toMerge = componentVNodeHooks[key]
+    if (existing !== toMerge &amp;&amp; !(existing &amp;&amp; existing._merged)) {
+      hooks[key] = existing ? mergeHook(toMerge, existing) : toMerge
+    }
+  }
+}
+</code></pre></div><p><code>installComponentHooks</code> 就是将 <code>componentVNodeHooks</code> 的钩子函数合并到 data.hook 中，在 VNode 执行 patch 的过程中执行相关钩子函数，合并时如果某个时机的钩子已经存在 <code>data.hook</code> 中，那么通过 <code>mergeHook</code> 做合并。</p> <h3 id="实例化vnode"><a href="#实例化vnode" class="header-anchor">#</a> 实例化VNode</h3> <div class="language- extra-class"><pre class="language-text"><code>const name = Ctor.options.name || tag
+const vnode = new VNode(
+  `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
+  data, undefined, undefined, undefined, context,
+  { Ctor, propsData, listeners, tag, children },
+  asyncFactory
+)
+return vnode
+</code></pre></div><p>通过 new VNode实例化一个 vnode 并返回。与普通元素节点的 vnode 不同，组件的 vnode 是没有 children 的。</p> <p>createComponent 会返回 vnode，同样会执行 <code>vm._update</code> 方法，进而执行 <code>patch</code> 函数。</p> <h2 id="patch"><a href="#patch" class="header-anchor">#</a> patch</h2> <p>patch 的过程会调用 createElm 创建元素节点，定义在 <code>src/core/vdom/patch.js</code> 中</p> <div class="language- extra-class"><pre class="language-text"><code>function createElm (
+  vnode,
+  insertedVnodeQueue,
+  parentElm,
+  refElm,
+  nested,
+  ownerArray,
+  index
+) {
+  // 这里又会出现一个 createComponent
+  if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
+    return
+  }
+  // ...
+}
+</code></pre></div><h3 id="createcomponent-2"><a href="#createcomponent-2" class="header-anchor">#</a> createComponent</h3> <div class="language- extra-class"><pre class="language-text"><code>function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
+  let i = vnode.data
+  if (isDef(i)) {
+    const isReactivated = isDef(vnode.componentInstance) &amp;&amp; i.keepAlive
+    if (isDef(i = i.hook) &amp;&amp; isDef(i = i.init)) {
+      i(vnode, false /* hydrating */)
+    }
+    // after calling the init hook, if the vnode is a child component
+    // it should've created a child instance and mounted it. the child
+    // component also has set the placeholder vnode's elm.
+    // in that case we can just return the element and be done.
+    if (isDef(vnode.componentInstance)) {
+      initComponent(vnode, insertedVnodeQueue)
+      insert(parentElm, vnode.elm, refElm)
+      if (isTrue(isReactivated)) {
+        reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm)
+      }
+      return true
+    }
+  }
+}
+</code></pre></div><p>首先对 <code>vnode.data</code> 做判断，如果 vnode 是一个 VNode，则得到 i 是钩子函数。在创建组件 VNode 时合并的钩子函数中包含 init 钩子函数。（上一章介绍过）
+该函数通过 <code>createComponentInstanceForVnode</code> 创建一个 Vue 的实例，然后调用 <code>$mount</code> 方法挂载子组件。</p> <div class="language- extra-class"><pre class="language-text"><code>export function createComponentInstanceForVnode (
+  vnode: any, // we know it's MountedComponentVNode but flow doesn't
+  parent: any, // activeInstance in lifecycle state
+): Component {
+  const options: InternalComponentOptions = {
+    _isComponent: true,
+    _parentVnode: vnode,
+    parent
+  }
+  // check inline-template render functions
+  const inlineTemplate = vnode.data.inlineTemplate
+  if (isDef(inlineTemplate)) {
+    options.render = inlineTemplate.render
+    options.staticRenderFns = inlineTemplate.staticRenderFns
+  }
+  return new vnode.componentOptions.Ctor(options)
+}
+</code></pre></div><p>这里的 <code>new vnode.componentOptions.Ctor(options)</code> 相当于上节的 <code>new Sub(options)</code></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2020/6/9 下午5:19:29</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.cea302cc.js" defer></script><script src="/assets/js/3.19db34b2.js" defer></script><script src="/assets/js/1.4d56c206.js" defer></script><script src="/assets/js/20.5a25b9c0.js" defer></script>
+  </body>
+</html>

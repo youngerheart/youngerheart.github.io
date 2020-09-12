@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>常见CI/CD工具对比 | 小径分岔的花园</title>
+    <meta name="description" content="CI/CD简介以及对 Travis CI，Jenkins 与 gitlab CI 的对比">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.7b2134bf.css" as="style"><link rel="preload" href="/assets/js/app.cea302cc.js" as="script"><link rel="preload" href="/assets/js/3.19db34b2.js" as="script"><link rel="preload" href="/assets/js/1.4d56c206.js" as="script"><link rel="preload" href="/assets/js/13.2a95825c.js" as="script"><link rel="prefetch" href="/assets/js/10.98dc1e52.js"><link rel="prefetch" href="/assets/js/11.7fb4689e.js"><link rel="prefetch" href="/assets/js/12.2ed3259e.js"><link rel="prefetch" href="/assets/js/14.618c3df5.js"><link rel="prefetch" href="/assets/js/15.4fcf900b.js"><link rel="prefetch" href="/assets/js/16.c92ef2b0.js"><link rel="prefetch" href="/assets/js/17.13be32c3.js"><link rel="prefetch" href="/assets/js/18.a189bad8.js"><link rel="prefetch" href="/assets/js/19.52cdb21f.js"><link rel="prefetch" href="/assets/js/20.5a25b9c0.js"><link rel="prefetch" href="/assets/js/21.35a53d71.js"><link rel="prefetch" href="/assets/js/22.990baba6.js"><link rel="prefetch" href="/assets/js/4.b95b1c30.js"><link rel="prefetch" href="/assets/js/5.77231472.js"><link rel="prefetch" href="/assets/js/6.e7dd61c7.js"><link rel="prefetch" href="/assets/js/7.3374042c.js"><link rel="prefetch" href="/assets/js/8.a1dda5c9.js"><link rel="prefetch" href="/assets/js/9.db049bb0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b2134bf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh-CN/" class="home-link router-link-active"><!----> <span class="site-name">小径分岔的花园</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/zh-CN/compare-ci-cd-tools.html" class="nav-link router-link-exact-active router-link-active">zh-CN</a></li><li class="dropdown-item"><!----> <a href="/en/" class="nav-link">en</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/zh-CN/compare-ci-cd-tools.html" class="nav-link router-link-exact-active router-link-active">zh-CN</a></li><li class="dropdown-item"><!----> <a href="/en/" class="nav-link">en</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>常见CI/CD工具对比</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh-CN/compare-ci-cd-tools.html#名词解释" class="sidebar-link">名词解释</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/zh-CN/compare-ci-cd-tools.html#没有ci-cd-所引发的问题" class="sidebar-link">没有CI/CD 所引发的问题</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#git-webhook机制" class="sidebar-link">Git webhook机制</a></li></ul></li><li><a href="/zh-CN/compare-ci-cd-tools.html#travis-ci" class="sidebar-link">Travis CI</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#使用准备" class="sidebar-link">使用准备</a></li><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#travis-yml-配置" class="sidebar-link">.travis.yml 配置</a></li><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#token-配置" class="sidebar-link">token 配置</a></li><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#deploy-sh-配置" class="sidebar-link">deploy.sh 配置</a></li></ul></li><li><a href="/zh-CN/compare-ci-cd-tools.html#jenkins" class="sidebar-link">Jenkins</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#安装" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#配置" class="sidebar-link">配置</a></li></ul></li><li><a href="/zh-CN/compare-ci-cd-tools.html#gitlab-runner" class="sidebar-link">Gitlab runner</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#原理" class="sidebar-link">原理</a></li><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#安装-2" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/zh-CN/compare-ci-cd-tools.html#gitlab-ci-yml" class="sidebar-link">.gitlab-ci.yml</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="名词解释"><a href="#名词解释" class="header-anchor">#</a> 名词解释</h2> <p>持续集成（Continuous Integration，简称 CI）</p> <p>持续交付(Continuous Deployment，简称CD)</p> <p>持续集成和持续部署通常与敏捷开发环境齐头并进。在这类环境中，团队希望在构建完成后立即将不同的代码段部署到生产环境中。</p> <p><strong>好处</strong>：每次代码的小幅变更，就能看到运行结果，从而不断累积小的变更，而不是在开发周期结束时，一下子合并一大块代码。</p> <p><img src="https://www.2cto.com/uploadfile/Collfiles/20180424/2018042409302768.jpg" alt="图解CI/CD"></p> <h2 id="没有ci-cd-所引发的问题"><a href="#没有ci-cd-所引发的问题" class="header-anchor">#</a> 没有CI/CD 所引发的问题</h2> <ul><li>上传 dist 文件到仓库导致完全无意义的冲突</li> <li>build、忘记 build、操作机器浪费的时间</li> <li>加了特技的 <a href="https://github.com/vuejs/vue/graphs/contributors" target="_blank" rel="noopener noreferrer">contribution<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul> <p><img src="http://img.99danji.com/uploadfile/2016/0419/20160419034745372.jpg" alt="没有CI/CD 所引发的问题"></p> <h3 id="git-webhook机制"><a href="#git-webhook机制" class="header-anchor">#</a> Git webhook机制</h3> <ul><li>Webhooks是&quot;user-defined HTTP回调&quot;。它们通常由一些事件触发，例如&quot;push 代码到repo&quot;，或者&quot;post 一个评论到博客&quot;。</li> <li>当事件发生时，源站点可以发起一个HTTP请求到webhook配置的URL。配置之后，用户可以通过在一个站点触发事件，调用另一个系统的任何操作。</li></ul> <p><strong>github 发送报文</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>// 后端发起请求
+// url 是 /payload
+POST /payload HTTP/1.1
+Host: localhost:4567
+// 唯一识别分发的GUID
+X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+// HMAC十六进制的响应体。如果secret配置了，这个头信息将被发送。HMAC十六进制由sha1哈希算法生成，secret作为HMAC的key。
+X-Hub-Signature: <span class="token assign-left variable">sha1</span><span class="token operator">=</span>7d38cdd689735b008b3c702edd92eea23791c5f6
+// 神奇的UA
+User-Agent: GitHub-Hookshot/044aadd
+Content-Type: application/json
+Content-Length: <span class="token number">6615</span>
+// 触发事件
+X-GitHub-Event: issues
+<span class="token punctuation">{</span>
+  <span class="token string">&quot;action&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;opened&quot;</span>,
+  <span class="token string">&quot;issue&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;url&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;https://api.github.com/repos/octocat/Hello-World/issues/1347&quot;</span>,
+    <span class="token string">&quot;number&quot;</span><span class="token builtin class-name">:</span> <span class="token number">1347</span>,
+    <span class="token punctuation">..</span>.
+  <span class="token punctuation">}</span>,
+  <span class="token string">&quot;repository&quot;</span> <span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;id&quot;</span><span class="token builtin class-name">:</span> <span class="token number">1296269</span>,
+    <span class="token string">&quot;full_name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;octocat/Hello-World&quot;</span>,
+    <span class="token string">&quot;owner&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+      <span class="token string">&quot;login&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;octocat&quot;</span>,
+      <span class="token string">&quot;id&quot;</span><span class="token builtin class-name">:</span> <span class="token number">1</span>,
+      <span class="token punctuation">..</span>.
+    <span class="token punctuation">}</span>,
+    <span class="token punctuation">..</span>.
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><img src="https://developer.github.com/assets/images/payload_request_tab.png" alt="官网示例"></p> <p><strong>配置方法</strong></p> <ul><li>Github: 仓库界面 -&gt; Settings -&gt; Webhooks</li> <li>Gitlab: 仓库界面 -&gt; Settings -&gt; Integrations</li></ul> <p><strong>以发布一个静态博客站点为例介绍三种CI/CD工具</strong></p> <h2 id="travis-ci"><a href="#travis-ci" class="header-anchor">#</a> Travis CI</h2> <p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017121901.png" alt="Travis CI"></p> <p>只支持 Github。</p> <h3 id="使用准备"><a href="#使用准备" class="header-anchor">#</a> 使用准备</h3> <p>在 (travis-ci.org)[https://travis-ci.org/] 绑定 github 账号。</p> <p>Travis 会列出 Github 上面你的所有仓库，以及你所属于的组织。此时，选择你需要 Travis 帮你构建的仓库，打开仓库旁边的开关。一旦激活了一个仓库，Travis 会监听这个仓库的所有变化。</p> <h3 id="travis-yml-配置"><a href="#travis-yml-配置" class="header-anchor">#</a> .travis.yml 配置</h3> <p>在项目根目录下新建 <code>.travis.yml</code> 文件。</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">language</span><span class="token punctuation">:</span> node_js
+<span class="token key atrule">sudo</span><span class="token punctuation">:</span> required
+<span class="token key atrule">node_js</span><span class="token punctuation">:</span> stable
+<span class="token key atrule">branch</span><span class="token punctuation">:</span> dev
+<span class="token key atrule">cache</span><span class="token punctuation">:</span>
+  <span class="token key atrule">directories</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> node_modules
+<span class="token key atrule">before_install</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> export TZ='Asia/Shanghai'  <span class="token comment"># 设置时区</span>
+<span class="token key atrule">script</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ./deploy.sh
+</code></pre></div><h3 id="token-配置"><a href="#token-配置" class="header-anchor">#</a> token 配置</h3> <p>github 左上头像 -&gt; Settings -&gt; Developer settings -&gt; Persional access tokens -&gt; Generate new token</p> <p>除了 delete_repo 都选上，将生成的 token 复制。</p> <p>在 Travis 选择要构建的仓库 左上 More options -&gt; Settings -&gt; Environment Variables 新建一个 access_token，粘贴刚才的 token。</p> <h3 id="deploy-sh-配置"><a href="#deploy-sh-配置" class="header-anchor">#</a> deploy.sh 配置</h3> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env sh</span>
+
+<span class="token comment"># 确保脚本抛出遇到的错误</span>
+$ <span class="token builtin class-name">set</span> -e
+
+<span class="token comment"># 生成静态文件</span>
+$ <span class="token function">npm</span> run build
+
+<span class="token comment"># 进入生成的文件夹</span>
+$ <span class="token builtin class-name">cd</span> .vuepress/dist
+
+$ <span class="token function">git</span> init
+$ <span class="token function">git</span> <span class="token function">add</span> -A
+$ <span class="token function">git</span> commit -m <span class="token string">'deploy'</span>
+
+$ <span class="token function">git</span> config --local user.name <span class="token string">&quot;youngerheart&quot;</span>
+$ <span class="token function">git</span> config --local user.email <span class="token string">&quot;admin@timehub.cc&quot;</span>
+
+$ <span class="token function">git</span> push -f https://<span class="token variable">${access_token}</span>@github.com/youngerheart/youngerheart.github.io.git master
+
+<span class="token builtin class-name">cd</span> -
+</code></pre></div><h2 id="jenkins"><a href="#jenkins" class="header-anchor">#</a> Jenkins</h2> <p><img src="https://cn.bing.com/th?id=OIP.RoGnyGsIDpGwq5UCdHpWpgHaFR&amp;pid=Api&amp;rs=1" alt="Jenkins + Docker"></p> <p>支持 git 与 svn。</p> <h3 id="安装"><a href="#安装" class="header-anchor">#</a> 安装</h3> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">mkdir</span> ~/Develop/jenkins
+
+// 新版貌似不用改权限了？ 
+$ <span class="token function">sudo</span> <span class="token function">chown</span> -R <span class="token number">1000</span>:1000 ~/Develop/jenkins/
+
+$ docker pull jenkins/jenkins
+
+$ <span class="token function">lsof</span> -i tcp:8000 // 查看端口占用
+
+$ <span class="token function">sudo</span> docker <span class="token builtin class-name">exec</span> -u root -it xxx /bin/bash // 进入容器
+
+$ docker run -d -p <span class="token number">8080</span>:8080 -p <span class="token number">50000</span>:50000 -v /Users/younger/Develop/jenkins:/var/jenkins_home jenkins/jenkins
+</code></pre></div><h3 id="配置"><a href="#配置" class="header-anchor">#</a> 配置</h3> <ol><li>进入<code>localhost:8080</code> ，在 Unlock Jenkins 中输入 <code>jenkins/secrets/initialAdminPassword</code> 的初始密码。</li></ol> <p><img src="http://image.timehub.cc/images/2019/07/30/3734705-55dc998018a217fd.png" alt="'初始密码'"></p> <ol start="2"><li>注册用户与安装插件，需要最新版 jenkins 否则插件可能安装不成功。</li></ol> <p><img src="http://image.timehub.cc/images/2019/07/30/3734705-b043f2d9fa0b355b.png" alt="'安装插件'"></p> <ol start="3"><li>Manage Jenkins -&gt; Configure System，输入 github 的 <code>access_token</code>。</li> <li>创建一个 <code>Freestyle project</code>，Source Code Management 中设置 git 仓库，Build Environment 中勾选 Provide Node &amp; npm bin/ folder to PATH</li> <li>Build 中添加一个 <code>Excude shell</code></li></ol> <div class="language- extra-class"><pre class="language-text"><code>$ npm config set registry http://registry.npm.taobao.org
+$ npm install
+$ ./deploy.sh
+</code></pre></div><h2 id="gitlab-runner"><a href="#gitlab-runner" class="header-anchor">#</a> Gitlab runner</h2> <p><img src="https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png" alt="Gitlab runner"></p> <h3 id="原理"><a href="#原理" class="header-anchor">#</a> 原理</h3> <p><em>Pipelines: 官方提供的插件队列集合，用来实现和集成连续交付。</em></p> <ol><li>Gitlab 服务器发放 url 与 token，拿去注册一个 runner，runner会通过轮训检查代码更新。</li> <li>每当 push 代码到制定分支，在 Pipelines 中新增 stages 状态为 <code>Pending</code>，根据 <code>.gitlab-ci.yml</code> 的配置 stages 中包含若干 jobs。</li> <li>runner 轮训到 Pending 的仓库，开始执行 CI/CD，同时将 stages 状态变更为 <code>Running</code></li> <li>执行成功 <code>Success</code> 失败 <code>Failed</code></li></ol> <h3 id="安装-2"><a href="#安装-2" class="header-anchor">#</a> 安装</h3> <p>首先需要有一台 Gitlab 服务器，一个有master及以上权限的项目。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>// mac
+$ brew update
+$ brew <span class="token function">install</span> gitlab-ci-multi-runner
+
+// CentOS
+$ <span class="token function">curl</span> -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.rpm.sh <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">bash</span>
+$ yum <span class="token function">install</span> gitlab-ci-multi-runner
+</code></pre></div><p>Gitlab -&gt; Setting -&gt; CI/CD -&gt; Running settings -&gt; Setup a specific Runner manually</p> <p>找到 <code>following URL</code> 与 <code>token</code></p> <p>runner 服务器中</p> <div class="language- extra-class"><pre class="language-text"><code>$ gitlab-ci-multi-runner register // 填入上述信息，类型选择shell，tag 需要和 .gitlab-ci.yml中一致
+$ gitlab-ci-multi-runner verify  #激活runner
+$ gitlab-ci-multi-runner list    #查看当前runner
+$ gitlab-ci-multi-runner run     #运行runner
+</code></pre></div><h3 id="gitlab-ci-yml"><a href="#gitlab-ci-yml" class="header-anchor">#</a> .gitlab-ci.yml</h3> <div class="language-bash extra-class"><pre class="language-bash"><code>stages:
+  - build
+
+build_dev:
+  stage: build
+  only:
+    - dev
+    - <span class="token builtin class-name">test</span>
+  tags:
+    - goo
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - cnpm i
+    - cnpm run build:site
+    - <span class="token function">rsync</span> -av ./docs/dist/ /data/wwwroot/goo/
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2019/7/30 上午11:51:17</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.cea302cc.js" defer></script><script src="/assets/js/3.19db34b2.js" defer></script><script src="/assets/js/1.4d56c206.js" defer></script><script src="/assets/js/13.2a95825c.js" defer></script>
+  </body>
+</html>
